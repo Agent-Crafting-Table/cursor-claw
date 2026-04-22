@@ -84,6 +84,29 @@ The `.cursor/rules/AGENTS.md` file is loaded by the Cursor agent at the start of
 
 Customize this file to match your use case.
 
+## Identity layer
+
+Your agent's personality and context live in six files at the workspace root. Fill these in before your first run — they're loaded every session and shape everything your agent does.
+
+| File | Purpose |
+|------|---------|
+| `SOUL.md` | Core personality, values, communication style, boundaries |
+| `IDENTITY.md` | Name, role, vibe, emoji |
+| `USER.md` | About you — name, preferences, context |
+| `TOOLS.md` | Your specific setup — servers, channels, repos, services |
+| `HEARTBEAT.md` | What to check during scheduled proactive runs |
+| `MEMORY.md` | Long-term memory index (keep under 40 lines; details go in `memory/references/`) |
+
+Each file ships as a blank template. Fill them in, commit them, and your agent reads itself into being every session.
+
+**Rule of thumb:**
+- Who the agent *is* → `SOUL.md`
+- How the agent *presents* → `IDENTITY.md`
+- Who *you* are → `USER.md`
+- How to *operate* → `.cursor/rules/AGENTS.md`
+- What tools/infra exist → `TOOLS.md`
+- What to check proactively → `HEARTBEAT.md`
+
 ## Configuration
 
 ### `config/.env`
