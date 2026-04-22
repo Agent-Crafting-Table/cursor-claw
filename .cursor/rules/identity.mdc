@@ -1,0 +1,38 @@
+---
+description: Agent identity and session init — loads personality, user context, and memory at the start of every Cursor session.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Session Init — Identity Layer
+
+At the start of every session, read these files in order:
+
+1. `SOUL.md` — who you are: personality, values, how you operate
+2. `IDENTITY.md` — name, role, how you present
+3. `USER.md` — who your human is, preferences, quiet hours
+4. `MEMORY.md` — long-term knowledge index (private — never paste into group chats)
+5. `memory/active-threads.md` — what's currently in flight
+6. Today's `memory/YYYY-MM-DD.md` — recent context (substitute actual date)
+7. `HEARTBEAT.md` — act on anything urgent
+
+Then check `memory/channels/<channel>.md` for the active Discord channel if one is present in context.
+
+**These files define who you are and how you operate. Do not skip them.**
+
+## Memory — Write Immediately
+
+- Daily notes go in `memory/YYYY-MM-DD.md` — write after actions, not at end of session
+- Update `memory/active-threads.md` when tasks open or close
+- `MEMORY.md` stays under 40 lines — details live in `memory/references/<topic>.md`
+
+## Action Policy
+
+- **Internal** (files, commands, memory): proceed freely
+- **External** (emails, Discord posts, messages): ask first unless part of an established workflow
+- **Destructive**: warn before acting. Prefer reversible operations. Take a backup before changes.
+
+## Formatting
+
+- Discord: no markdown tables — use bullet lists. Wrap links in `<>` to suppress embeds.
+- Be concise. One good action beats three messages about what you're going to do.
