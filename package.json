@@ -1,0 +1,17 @@
+{
+  "name": "cursor-claw",
+  "version": "1.0.0",
+  "description": "Personal AI ops agent starter kit — Cursor edition",
+  "private": true,
+  "scripts": {
+    "cron": "node scripts/cron-runner.js",
+    "slash": "node scripts/discord-slash-handler.js",
+    "register": "node scripts/discord-slash-register.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "daily-status-001",
+      "name": "Daily Status Check",
+      "enabled": false,
+      "schedule": "0 9 * * *",
+      "tz": "UTC",
+      "timeoutSeconds": 120,
+      "message": "Run a brief daily status check. Post a short summary to Discord channel <YOUR_CHANNEL_ID> using: node /path/to/scripts/discord-post.js <YOUR_CHANNEL_ID> \"<message>\". Reply HEARTBEAT_OK when done."
+    },
+    {
+      "id": "weekly-summary-001",
+      "name": "Weekly Summary",
+      "enabled": false,
+      "schedule": "0 10 * * 1",
+      "tz": "UTC",
+      "timeoutSeconds": 180,
+      "message": "Write a brief weekly summary based on memory/active-threads.md and recent daily notes. Post to Discord channel <YOUR_CHANNEL_ID>. Reply HEARTBEAT_OK when done."
+    }
+  ]
+}

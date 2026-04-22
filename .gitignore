@@ -1,0 +1,9 @@
+node_modules/
+config/.env
+crons/logs/*.log
+memory/*.md
+!memory/AGENT.md
+!memory/active-threads.md
+data/
+.cache/
+*.gguf

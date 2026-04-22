@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "discord": {
+      "command": "node",
+      "args": ["./mcp-servers/fleet-discord/server.js"],
+      "env": {
+        "DISCORD_BOT_TOKEN": "${DISCORD_BOT_TOKEN}",
+        "DISCORD_CHANNEL_ID": "${DISCORD_CHANNEL_ID}",
+        "DISCORD_GUILD_ID": "${DISCORD_GUILD_ID}"
+      }
+    }
+  }
+}
