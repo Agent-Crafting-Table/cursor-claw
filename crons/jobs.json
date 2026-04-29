@@ -18,6 +18,16 @@
       "tz": "UTC",
       "timeoutSeconds": 180,
       "message": "Write a brief weekly summary based on memory/active-threads.md and recent daily notes. Post to Discord channel <YOUR_CHANNEL_ID>. Reply HEARTBEAT_OK when done."
+    },
+    {
+      "id": "weekly-orphan-check-001",
+      "name": "Weekly Orphan Check",
+      "enabled": false,
+      "schedule": "15 5 * * 3",
+      "tz": "UTC",
+      "timeoutSeconds": 180,
+      "alertSilentExit": false,
+      "message": "Weekly orphan check — surface ONLY actionable orphans, not noise. The naive version of this check (strict TOOLS.md/AGENTS.md mention) flags ~75% of every script as orphan because tests, cron-managed jobs, and dependencies aren't mentioned in those files. That's noise, not signal.\n\nA file is NOT an orphan if any of:\n- It's a *.test.* / *.test.js / *.test.mjs / *.test.sh file (tests don't need TOOLS.md entries)\n- Its name appears in /workspace/crons/jobs.json (cron-managed)\n- It's referenced from /workspace/start.sh, /workspace/restart-loop.sh, or any other top-level *.sh\n- It's referenced from another script in /workspace/scripts/\n- It's documented in any /workspace/memory/skills/*.md\n- It was modified in the last 7 days (active development)\n\nA file IS an orphan if all exclusions above fail AND it hasn't been touched in 30+ days AND its filename suggests one-off / temp work (leading underscore, 'tmp', 'migrate', 'old', 'fix', 'temp' in the name) OR it has no callers anywhere.\n\nSteps:\n1. List candidate scripts in /workspace/scripts/ (top-level, not subdirs)\n2. Apply exclusion rules; flag survivors as 'truly orphan'\n3. Same logic for memory/references/ vs MEMORY.md (lighter — those just need MEMORY.md mention)\n4. Find tmp-* files older than 7 days in /workspace/ (find /workspace -maxdepth 1 -name 'tmp-*' -mtime +7)\n\nIf zero orphans across all three categories: reply HEARTBEAT_OK silently. Do NOT post a 'no orphans' message.\nOtherwise post ONCE:\n  node /workspace/scripts/discord-post.js <YOUR_CHANNEL_ID> \"🔍 Orphan Check — <date>\\nStale scripts (N): <names>. Stale references (N): <names>. Tmp >7d: None ✅ OR <names>.\"\n\nKeep under 1500 chars. Do not retry or post twice."
     }
   ]
 }
