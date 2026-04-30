@@ -2,6 +2,77 @@
 
 A full-featured starter kit for running a personal AI ops agent powered by **Cursor**. Includes Discord integration via MCP, a cron scheduler, persistent memory, and structured workspace rules — everything you need to go from a fresh Cursor install to a running personal agent.
 
+## How It Works
+
+```mermaid
+flowchart TD
+    subgraph "Cursor Workspace"
+        A[".cursor/rules/AGENTS.md
+Loaded every Cursor agent session"] --> B[Cursor Agent]
+        C[".cursor/mcp.json
+MCP server config"] --> B
+        B <--> D[fleet-discord MCP plugin
+or discord-streaming]
+        D <--> E[Discord Server]
+    end
+
+    subgraph "Cron Runner (separate process)"
+        F[cron-runner.js] --> G[crons/jobs.json
+schedule definitions]
+        G -->|job fires| H["cursor --headless
+run prompt as agent task"]
+        H --> B
+    end
+
+    subgraph "Memory System"
+        I[memory/AGENT.md] --> B
+        J[memory/active-threads.md] --> B
+        K["memory/YYYY-MM-DD.md
+daily notes"] --> B
+        L[memory/references/] --> B
+    end
+
+    subgraph "Identity Layer"
+        M[SOUL.md] --> B
+        N[IDENTITY.md] --> B
+        O[USER.md] --> B
+        P[TOOLS.md] --> B
+        Q[HEARTBEAT.md] --> B
+    end
+```
+
+```mermaid
+flowchart LR
+    subgraph "cursor-claw vs claude-code-claw"
+        CC["claude-code-claw
+Docker + Claude Code CLI
+OAuth-based
+tmux session
+always-on container"]
+        CUR["cursor-claw
+Cursor editor
+Claude Max or Cursor Pro
+cursor --headless for cron
+background agent support"]
+    end
+
+    subgraph "Shared Building Blocks"
+        FL["fleet-discord
+Discord MCP plugin"]
+        CR["cron-runner.js
+Natural language job scheduler"]
+        SK["skill library
+memory system"]
+    end
+
+    CC --> FL
+    CC --> CR
+    CUR --> FL
+    CUR --> CR
+    CC --> SK
+    CUR --> SK
+```
+
 ## What you get
 
 - **Cursor-native agent setup** — workspace rules, AGENTS.md identity file, and MCP configuration wired up out of the box
